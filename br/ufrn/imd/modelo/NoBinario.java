@@ -2,29 +2,29 @@ package br.ufrn.imd.modelo;
 
 public class NoBinario <T extends Comparable <T>>  {
 	
-	private NoBinario<T> esc;
+	private NoBinario<T> esq;
 	private NoBinario<T> dir;
 	private T dado;
 
 	public NoBinario(T dado) {
 		super();
-		this.esc = null;
+		this.esq = null;
 		this.dir = null;
 		this.dado = dado;
 	}
 
 	public NoBinario() {
-		this.esc = null;
+		this.esq = null;
 		this.dir = null;
 		this.dado = null;
 	}
 
-	public NoBinario<T> getEsc() {
-		return esc;
+	public NoBinario<T> getEsq() {
+		return esq;
 	}
 
-	public void setEsc(NoBinario<T> esc) {
-		this.esc = esc;
+	public void setEsq(NoBinario<T> esq) {
+		this.esq = esq;
 	}
 
 	public NoBinario<T> getDir() {

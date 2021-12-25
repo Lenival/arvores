@@ -24,13 +24,13 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 	}
 
 	public abstract void inserirDado(T dado);
-	public abstract void inserirNo(NoBinario<T> No, T dado);
+	public abstract void inserirNo(NoBinario<T> raizSubArvore, T dado);
 	public abstract void removerDado(T dado);
 
 	public void percorrerPreOrdem(NoBinario<T> raiz) {
 		if (raiz != null) {
 			System.out.println(raiz.toString());
-			percorrerPreOrdem(raiz.getEsc());
+			percorrerPreOrdem(raiz.getEsq());
 			percorrerPreOrdem(raiz.getDir());
 		}			
 	}
@@ -38,14 +38,14 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 	public void percorrerPreOrdem(NoBinario<T> raiz, ArrayList<T> a) {
 		if (raiz != null) {
 			a.add(raiz.getDado());
-			percorrerPreOrdem(raiz.getEsc(), a);
+			percorrerPreOrdem(raiz.getEsq(), a);
 			percorrerPreOrdem(raiz.getDir(), a);
 		}			
 	}
 
 	public void percorrerEmOrdem(NoBinario<T> raiz) {
 		if (raiz != null) {
-			percorrerEmOrdem(raiz.getEsc());
+			percorrerEmOrdem(raiz.getEsq());
 			System.out.println(raiz.toString());
 			percorrerEmOrdem(raiz.getDir());
 		}			
@@ -53,7 +53,7 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 
 	public void percorrerEmOrdem(NoBinario<T> raiz, ArrayList<T> a) {
 		if (raiz != null) {
-			percorrerEmOrdem(raiz.getEsc(), a);
+			percorrerEmOrdem(raiz.getEsq(), a);
 			a.add(raiz.getDado());
 			percorrerEmOrdem(raiz.getDir(), a);
 		}			
@@ -61,14 +61,14 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 
 	public void percorrerPosOrdem(NoBinario<T> raiz) {
 		if (raiz != null) {
-			percorrerEmOrdem(raiz.getEsc());
+			percorrerEmOrdem(raiz.getEsq());
 			percorrerEmOrdem(raiz.getDir());
 			System.out.println(raiz.toString());
 		}		
 	}
 	public void percorrerPosOrdem(NoBinario<T> raiz, ArrayList<T> a) {
 		if (raiz != null) {
-			percorrerEmOrdem(raiz.getEsc(), a);
+			percorrerEmOrdem(raiz.getEsq(), a);
 			percorrerEmOrdem(raiz.getDir(), a);
 			a.add(raiz.getDado());
 		}		

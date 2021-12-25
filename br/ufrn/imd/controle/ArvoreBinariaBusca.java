@@ -21,11 +21,11 @@ public class ArvoreBinariaBusca<T extends Comparable <T>> extends ArvoreBinaria<
 	public void inserirNo(NoBinario<T> raizSubArvore,T dado) {
 		// TODO Auto-generated method stub
 		if (dado.compareTo(raizSubArvore.getDado()) < 0 ) {
-			if(raizSubArvore.getEsc() == null) {
+			if(raizSubArvore.getEsq() == null) {
 				NoBinario<T> novo_no = new NoBinario<>(dado);
-				raizSubArvore.setEsc(novo_no);
+				raizSubArvore.setEsq(novo_no);
 			}else {
-				inserirNo(raizSubArvore.getEsc(), dado);
+				inserirNo(raizSubArvore.getEsq(), dado);
 			}
 		}
 		if (raizSubArvore.getDado().compareTo(dado) < 0 ) {
@@ -37,7 +37,38 @@ public class ArvoreBinariaBusca<T extends Comparable <T>> extends ArvoreBinaria<
 			}
 		}
 	}
-	
+
+	public NoBinario<T> buscarDado(NoBinario<T> referenciaRaiz, T dado, int[] f) {
+		if (referenciaRaiz != null) {
+			if(referenciaRaiz.getDado().equals(dado)) {
+				f[0] = 1;
+			}else {
+				if (dado.compareTo(referenciaRaiz.getDado()) < 0) {
+					if (referenciaRaiz.getEsq() == null) {
+						f[0] = 2;
+					}else {
+						referenciaRaiz = referenciaRaiz.getEsq();
+						//referenciaRaiz.setDado(referenciaRaiz.getEsq().getDado());
+						//referenciaRaiz.setEsq(referenciaRaiz.getEsq().getEsq());
+						//referenciaRaiz.setDir(referenciaRaiz.getEsq().getDir());
+					}
+				}else {
+					if (referenciaRaiz.getDir() == null) {
+						f[0] = 3;
+					}else {
+						referenciaRaiz = referenciaRaiz.getDir();
+						//referenciaRaiz.setDado(referenciaRaiz.getDir().getDado());
+						//referenciaRaiz.setEsq(referenciaRaiz.getDir().getEsq());
+						//referenciaRaiz.setDir(referenciaRaiz.getDir().getDir());
+					}
+				}
+				if (f[0] < 1) {
+					return buscarDado(referenciaRaiz, dado, f);
+				}
+			}
+		}
+		return referenciaRaiz;
+	}
 	
 	@Override
 	public void removerDado(T dado) {
