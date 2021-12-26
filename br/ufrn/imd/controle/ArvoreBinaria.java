@@ -25,7 +25,7 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 
 	public abstract void inserirDado(T dado);
 	public abstract void inserirNo(NoBinario<T> raizSubArvore, T dado);
-	public abstract void removerDado(T dado);
+	public abstract NoBinario<T> removerNo(NoBinario<T> raizSubArvore, T dado);
 
 	public void percorrerPreOrdem(NoBinario<T> raiz) {
 		if (raiz != null) {

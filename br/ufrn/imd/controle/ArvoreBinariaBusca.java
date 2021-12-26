@@ -48,18 +48,12 @@ public class ArvoreBinariaBusca<T extends Comparable <T>> extends ArvoreBinaria<
 						f[0] = 2;
 					}else {
 						referenciaRaiz = referenciaRaiz.getEsq();
-						//referenciaRaiz.setDado(referenciaRaiz.getEsq().getDado());
-						//referenciaRaiz.setEsq(referenciaRaiz.getEsq().getEsq());
-						//referenciaRaiz.setDir(referenciaRaiz.getEsq().getDir());
 					}
 				}else {
 					if (referenciaRaiz.getDir() == null) {
 						f[0] = 3;
 					}else {
 						referenciaRaiz = referenciaRaiz.getDir();
-						//referenciaRaiz.setDado(referenciaRaiz.getDir().getDado());
-						//referenciaRaiz.setEsq(referenciaRaiz.getDir().getEsq());
-						//referenciaRaiz.setDir(referenciaRaiz.getDir().getDir());
 					}
 				}
 				if (f[0] < 1) {
@@ -69,11 +63,52 @@ public class ArvoreBinariaBusca<T extends Comparable <T>> extends ArvoreBinaria<
 		}
 		return referenciaRaiz;
 	}
+
+	public NoBinario<T> buscarMaximo(NoBinario<T> referenciaRaiz) {
+		NoBinario<T> noTemp = new NoBinario<>();
+		noTemp = referenciaRaiz;
+		if (noTemp != null)
+			while (noTemp.getDir() != null)
+				noTemp = noTemp.getDir();
+		return noTemp;
+	}
+	
+	public NoBinario<T> buscarMinimo(NoBinario<T> referenciaRaiz) {
+		NoBinario<T> noTemp = new NoBinario<>();
+		noTemp = referenciaRaiz;
+		if (noTemp != null)
+			while (noTemp.getEsq() != null)
+				noTemp = noTemp.getEsq();
+		return noTemp;
+	}
 	
 	@Override
-	public void removerDado(T dado) {
-		// TODO Auto-generated method stub
-
+	public NoBinario<T> removerNo(NoBinario<T> referenciaRaiz, T dado) {
+		if(referenciaRaiz == null)
+			return referenciaRaiz;
+		if (dado.compareTo(referenciaRaiz.getDado()) < 0) {
+			referenciaRaiz.setEsq(removerNo(referenciaRaiz.getEsq(), dado));
+		}else {
+			if (dado.compareTo(referenciaRaiz.getDado()) > 0) {
+				referenciaRaiz.setDir(removerNo(referenciaRaiz.getDir(), dado));
+			}else {
+				// Tratando os 3 possíveis casos de remoção
+				if ((referenciaRaiz.getEsq() == null) && (referenciaRaiz.getDir() == null) ) {
+					return null;
+				} else if ((referenciaRaiz.getEsq() == null) && (referenciaRaiz.getDir() != null)) { // Tem 1 filho à direita
+					return referenciaRaiz.getDir();
+				} else if ((referenciaRaiz.getEsq() != null) && (referenciaRaiz.getDir() == null)) { // Tem 1 filho à esquerda
+						return referenciaRaiz.getEsq();
+				} else { // Tem 2 filhos!!
+					T dadoAux = buscarMinimo(referenciaRaiz.getDir()).getDado();	// Encontra o menor dado da sub-árvore direita
+					referenciaRaiz.setDir(removerNo(referenciaRaiz.getDir(), dadoAux));	// Remove o nó encontrado antes
+					referenciaRaiz.setDado(dadoAux);	// "Remove" o nó da chamada original substituindo seu dado 
+					return referenciaRaiz;	// Retorna a árvore após a remoção
+				}
+			}
+		}
+		
+		return referenciaRaiz;
 	}
 
 }
