@@ -56,21 +56,23 @@ public class TestaArvores {
 		a1.inserirDado(2);
 		a1.inserirDado(20);
 		a1.inserirDado(9);
+		a1.inserirDado(11);
+		a1.inserirDado(19);
 
 		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 20));
 		
 		System.out.println("Percorrendo Árvore em ordem");
-		// a1.setRaiz(a1.removerNo(a1.getRaiz(), 10));   // Remoção
+		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 10));   // Remoção
 		arrayDados = new ArrayList<>();
 		a1.percorrerEmOrdem(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
 		System.out.println("Percorrendo Árvore em pré-ordem");
-		// a1.setRaiz(a1.removerNo(a1.getRaiz(), 20));   // Remoção
+		a1.setRaiz(a1.removerNo(a1.getRaiz(), 18));   // Remoção
 		arrayDados = new ArrayList<>();
 		a1.percorrerPreOrdem(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
 		System.out.println("Percorrendo Árvore em pós-ordem");
-		a1.setRaiz(a1.removerNo(a1.getRaiz(), 7));   // Remoção
+		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 7));   // Remoção
 		arrayDados = new ArrayList<>();
 		a1.percorrerPosOrdem(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
