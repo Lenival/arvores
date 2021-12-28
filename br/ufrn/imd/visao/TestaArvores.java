@@ -44,7 +44,7 @@ public class TestaArvores {
 		noTemp = a1.buscarDado(noTemp, 11, f);
 		System.out.println("f: "+f[0]+" para noTemp.getDado(): "+noTemp.getDado());
 		
-		System.out.println("Percorrendo Árvore em pré-ordem");
+		System.out.println("Percorrendo árvore em pré-ordem");
 		ArrayList<Integer> arrayDados = new ArrayList<>();
 		a1.percorrerPreOrdem(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
@@ -61,23 +61,23 @@ public class TestaArvores {
 
 		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 20));
 		
-		System.out.println("Percorrendo Árvore em ordem");
+		System.out.println("Percorrendo árvore em ordem");
 		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 10));   // Remoção
 		arrayDados = new ArrayList<>();
 		a1.percorrerEmOrdem(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
-		System.out.println("Percorrendo Árvore em pré-ordem");
+		System.out.println("Percorrendo árvore em pré-ordem");
 		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 18));   // Remoção
 		arrayDados = new ArrayList<>();
 		a1.percorrerPreOrdem(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
 		
-		System.out.println("Percorrendo fila em nível");
+		System.out.println("Percorrendo árvore em nível");
 		arrayDados = new ArrayList<>();
 		a1.percorrerEmNivel(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
 		
-		System.out.println("Percorrendo Árvore em pós-ordem");
+		System.out.println("Percorrendo árvore em pós-ordem");
 		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 7));   // Remoção
 		arrayDados = new ArrayList<>();
 		a1.percorrerPosOrdem(a1.getRaiz(), arrayDados);
@@ -85,7 +85,21 @@ public class TestaArvores {
 
 		System.out.println("O elemento máximo é "+a1.buscarMaximo(a1.getRaiz()).getDado()+" e o mínimo é "+a1.buscarMinimo(a1.getRaiz()).getDado());
 		
-		a1.percorrerEmNivel(a1.getRaiz());
+		//a1.percorrerEmNivel(a1.getRaiz());
+		System.out.println("O enésimo elemento é: "+ a1.getEnesimoElemento(10));
+		int elemento = 7;
+		System.out.println("A posição do elemento "+ elemento +" é: "+ a1.getPosicao(elemento));
+		System.out.println("O elemento mediano é: "+ a1.getMediana());
+		a1.removerNo(a1.getRaiz(), 5);
+		arrayDados = new ArrayList<>();
+		a1.percorrerEmOrdem(a1.getRaiz(), arrayDados);
+		System.out.println(arrayDados);
+		System.out.println("O elemento mediano é: "+ a1.getMediana());
+		a1.inserirDado(21);
+		arrayDados = new ArrayList<>();
+		a1.percorrerEmOrdem(a1.getRaiz(), arrayDados);
+		System.out.println(arrayDados);
+		System.out.println("O elemento mediano é: "+ a1.getMediana());
 		
 
 	}

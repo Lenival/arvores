@@ -1,6 +1,5 @@
 package br.ufrn.imd.controle;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -105,6 +104,40 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 			}
 		}
 	}
+	
+	public T getEnesimoElemento(int n) {
+		if (this.raiz == null)
+			return null;
+		else {
+			ArrayList<T> elementos = new ArrayList<T>();
+			percorrerEmOrdem(this.raiz, elementos);
+			return elementos.get(n-1);
+		}
+			
+	}
+	
+	public Integer getPosicao(T elemento) {
+		if (this.raiz == null)
+			return null;
+		else {
+			ArrayList<T> elementos = new ArrayList<T>();
+			percorrerEmOrdem(this.raiz, elementos);
+			return elementos.indexOf(elemento)+1;
+		}
+			
+	}
+
+	public T getMediana() {
+		if (this.raiz == null)
+			return null;
+		else {
+			ArrayList<T> elementos = new ArrayList<T>();
+			percorrerEmOrdem(this.raiz, elementos);
+			return elementos.get((int) Math.round((elementos.size()-1)/2));
+		}
+			
+	}
+
 }
 
 
