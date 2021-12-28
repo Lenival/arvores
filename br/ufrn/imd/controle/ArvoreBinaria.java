@@ -1,6 +1,9 @@
 package br.ufrn.imd.controle;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import br.ufrn.imd.modelo.NoBinario;
 
@@ -73,4 +76,38 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 			a.add(raiz.getDado());
 		}		
 	}
+
+	public void percorrerEmNivel(NoBinario<T> raiz) {
+		Queue<NoBinario<T>> fila = new LinkedList<NoBinario<T>>();
+		fila.add(raiz);
+		while(!fila.isEmpty()){
+			raiz = fila.remove();
+			System.out.println(raiz.getDado().toString());
+			if(raiz.getEsq() != null) {
+				fila.add(raiz.getEsq());
+			}
+			if(raiz.getDir() != null) {
+				fila.add(raiz.getDir());
+			}
+		}
+	}
+	public void percorrerEmNivel(NoBinario<T> raiz, ArrayList<T> a) {
+		Queue<NoBinario<T>> fila = new LinkedList<NoBinario<T>>();
+		fila.add(raiz);
+		while(!fila.isEmpty()){
+			raiz = fila.remove();
+			a.add(raiz.getDado());
+			if(raiz.getEsq() != null) {
+				fila.add(raiz.getEsq());
+			}
+			if(raiz.getDir() != null) {
+				fila.add(raiz.getDir());
+			}
+		}
+	}
 }
+
+
+
+
+
