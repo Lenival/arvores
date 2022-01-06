@@ -81,7 +81,7 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 		fila.add(raiz);
 		while(!fila.isEmpty()){
 			raiz = fila.remove();
-			System.out.println(raiz.getDado().toString());
+			System.out.println(raiz.toString());
 			if(raiz.getEsq() != null) {
 				fila.add(raiz.getEsq());
 			}
@@ -90,12 +90,12 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 			}
 		}
 	}
-	public void percorrerEmNivel(NoBinario<T> raiz, ArrayList<T> a) {
+	public void percorrerEmNivel(NoBinario<T> raiz, ArrayList<NoBinario<T>> a) {
 		Queue<NoBinario<T>> fila = new LinkedList<NoBinario<T>>();
 		fila.add(raiz);
 		while(!fila.isEmpty()){
 			raiz = fila.remove();
-			a.add(raiz.getDado());
+			a.add(raiz);
 			if(raiz.getEsq() != null) {
 				fila.add(raiz.getEsq());
 			}

@@ -2,9 +2,9 @@ package br.ufrn.imd.modelo;
 
 public class NoBinario <T extends Comparable <T>>  {
 	
-	private NoBinario<T> esq;
-	private NoBinario<T> dir;
-	private T dado;
+	protected NoBinario<T> esq;
+	protected NoBinario<T> dir;
+	protected T dado;
 
 	public NoBinario(T dado) {
 		super();
@@ -47,7 +47,6 @@ public class NoBinario <T extends Comparable <T>>  {
 	public String toString() {
 		return "NoBinario [dado=" + dado + "]";
 	}
-	
 	
 		
 }
