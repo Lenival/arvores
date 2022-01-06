@@ -1,7 +1,9 @@
 package br.ufrn.imd.visao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import br.ufrn.imd.controle.ArvoreAVL;
 import br.ufrn.imd.controle.ArvoreBinariaBusca;
 import br.ufrn.imd.modelo.NoBinario;
 
@@ -73,8 +75,8 @@ public class TestaArvores {
 		System.out.println(arrayDados);
 		
 		System.out.println("Percorrendo árvore em nível");
-		arrayDados = new ArrayList<>();
-		a1.percorrerEmNivel(a1.getRaiz(), arrayDados);
+		ArrayList<NoBinario<Integer>> arrayNos = new ArrayList<NoBinario<Integer>>();
+		a1.percorrerEmNivel(a1.getRaiz(), arrayNos);
 		System.out.println(arrayDados);
 		
 		System.out.println("Percorrendo árvore em pós-ordem");
@@ -101,7 +103,31 @@ public class TestaArvores {
 		System.out.println(arrayDados);
 		System.out.println("O elemento mediano é: "+ a1.getMediana());
 		
-
+		ArvoreBinariaBusca<Integer> a2 = new ArvoreBinariaBusca<>();
+		ArrayList<Integer> v = new ArrayList<>(Arrays.asList(61,89,66,43,51,16,55,11,79,77,82,32));
+		for(Integer i : v)
+			a2.inserirDado(i);
+		arrayNos.clear();
+		a2.percorrerEmNivel(a2.getRaiz(), arrayNos);
+		System.out.println("Percorrendo árvore em nível");
+		System.out.println(arrayNos);
+		
+		ArvoreAVL<Integer> avl1 = new ArvoreAVL<Integer>();
+		arrayNos.clear();
+		System.out.println(v);
+		for(Integer i : v) {
+			System.out.println("Inserindo o elemento " + i);
+			avl1.inserirDado(i);
+			/*avl1.percorrerEmNivel(avl1.getRaiz(), arrayNos);
+			System.out.println("Percorrendo árvore AVL em nível");
+			System.out.println(arrayNos);
+			arrayNos.clear();*/
+		}
+		//avl1.inserirDado(5);
+		avl1.percorrerEmNivel(avl1.getRaiz(), arrayNos);
+		System.out.println("Percorrendo árvore AVL em nível");
+		System.out.println(arrayNos);
+		
 	}
 
 }
