@@ -18,6 +18,8 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			no.setAltura(1);
 			this.raiz = no;
 		}else {
+			// TODO (Resolvido, as funções de rotação estavam trocadas) Avaliar problema na inserção do 16 em 61, 89, 66, 43, 51, 16
+			// o resultado incorreto está sendo na inserção do 16 e o 66 continua com raiz, ao invés do 51
 			inserirNo((NoBinarioAVL<T>)raiz, dado);
 		}
 	}
@@ -31,22 +33,19 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			}else {
 				inserirNo(raizSubArvore.getEsq(), dado);
 			}
-			
-			if (fatorBalanceamento(raizSubArvore) >= 2) {
-				NoBinarioAVL<T> noDes = new NoBinarioAVL<T>(); 
-				noDes = raizSubArvore;
-				if (dado.compareTo(raizSubArvore.getEsq().getDado()) < 0) {
-					rotacionarEsq(noDes);
-				}else {
-					rotacionarEsqDir(noDes);
-				}
-				raizSubArvore = noDes;
-			}
 
 			if (alturaNo(raizSubArvore)<(alturaNo(raizSubArvore.getEsq())+1)) {
-				//raizSubArvore.setAltura(alturaNo(raizSubArvore.getEsq())+1);
 				raizSubArvore.setAltura(maior(alturaNo(raizSubArvore.getEsq()),alturaNo(raizSubArvore.getDir()))+1);
 			}
+			
+			if (fatorBalanceamento(raizSubArvore) >= 2) {
+				if (dado.compareTo(raizSubArvore.getEsq().getDado()) < 0) {
+					rotacionarEsq(raizSubArvore);
+				}else {
+					rotacionarEsqDir(raizSubArvore);
+				}
+			}
+			
 		}else if (raizSubArvore.getDado().compareTo(dado) < 0 ) { // A inserção será feita do lado direito
 			if(raizSubArvore.getDir() == null) {
 				NoBinarioAVL<T> novo_no = new NoBinarioAVL<T>(dado);
@@ -54,66 +53,58 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			}else {
 				inserirNo(raizSubArvore.getDir(), dado);
 			}
+
+
+			if (alturaNo(raizSubArvore)<(alturaNo(raizSubArvore.getDir())+1)) {
+				raizSubArvore.setAltura(maior(alturaNo(raizSubArvore.getEsq()),alturaNo(raizSubArvore.getDir()))+1);
+			}
 			
 			// TODO (resolvido, mas não testado) Resolver problema de estar perdendo a referência quando entra aqui
 			if (fatorBalanceamento(raizSubArvore) >= 2) {
-				NoBinarioAVL<T> noDes = new NoBinarioAVL<T>(); 
-				noDes = raizSubArvore;
 				if (dado.compareTo(raizSubArvore.getDir().getDado()) > 0) {
-					rotacionarDir(noDes);
+					rotacionarDir(raizSubArvore);
 				}else {
-					rotacionarDirEsq(noDes);
+					rotacionarDirEsq(raizSubArvore);
 				}
-				raizSubArvore = noDes;
-			}
-
-			if (alturaNo(raizSubArvore)<(alturaNo(raizSubArvore.getDir())+1)) {
-				//raizSubArvore.setAltura(alturaNo(raizSubArvore.getDir())+1);
-				raizSubArvore.setAltura(maior(alturaNo(raizSubArvore.getEsq()),alturaNo(raizSubArvore.getDir()))+1);
 			}
 			
 		} else 
 			System.out.println("Valor duplicado!");
 	}
 
-	public void rotacionarDir(NoBinarioAVL<T> raizSubArvore) {
-		NoBinarioAVL<T> no = new NoBinarioAVL<T>(); 
-		//no = raizSubArvore.getEsq();
+	public void rotacionarEsq(NoBinarioAVL<T> raizSubArvore) {
+		NoBinarioAVL<T> no = new NoBinarioAVL<T>();
 		no.copiarNo(raizSubArvore.getEsq());
 		raizSubArvore.setEsq(no.getDir());
 		raizSubArvore.setAltura(maior(alturaNo(raizSubArvore.getEsq()),alturaNo(raizSubArvore.getDir()))+1);
-		//raizSubArvore.getEsq().copiarNo(no.getDir());
-		//no.setDir(raizSubArvore);
 		no.setDir(new NoBinarioAVL<T>());
 		no.getDir().copiarNo(raizSubArvore);
 		//raizSubArvore.setAltura(maior(alturaNo(raizSubArvore.getEsq()),alturaNo(raizSubArvore.getDir()))+1);
 		no.setAltura(maior(alturaNo(no.getEsq()),alturaNo(raizSubArvore))+1);
-		//raizSubArvore = no;
 		raizSubArvore.copiarNo(no);
 	}
-	public void rotacionarEsq(NoBinarioAVL<T> raizSubArvore) {
+	public void rotacionarDir(NoBinarioAVL<T> raizSubArvore) {
 		NoBinarioAVL<T> no = new NoBinarioAVL<T>();
-		//no = raizSubArvore.getDir();
 		no.copiarNo(raizSubArvore.getDir());
 		raizSubArvore.setDir(no.getEsq());
+		// Atualização da altura necessária porque não foi feita anteriormente
 		raizSubArvore.setAltura(maior(alturaNo(raizSubArvore.getEsq()),alturaNo(raizSubArvore.getDir()))+1);
-		//no.setEsq(raizSubArvore);
 		no.setEsq(new NoBinarioAVL<T>());
 		no.getEsq().copiarNo(raizSubArvore);
+		//raizSubArvore.setAltura(maior(alturaNo(raizSubArvore.getEsq()),alturaNo(raizSubArvore.getDir()))+1);
 		no.setAltura(maior(alturaNo(no.getDir()),alturaNo(raizSubArvore))+1);
-		//raizSubArvore = no;
 		raizSubArvore.copiarNo(no);
 	}
 	public void rotacionarDirEsq(NoBinarioAVL<T> raizSubArvore) {
-		rotacionarDir(raizSubArvore.getDir());
-		rotacionarEsq(raizSubArvore);
-	}
-	public void rotacionarEsqDir(NoBinarioAVL<T> raizSubArvore) {
-		rotacionarEsq(raizSubArvore.getEsq());
+		rotacionarEsq(raizSubArvore.getDir());
 		rotacionarDir(raizSubArvore);
 	}
+	public void rotacionarEsqDir(NoBinarioAVL<T> raizSubArvore) {
+		rotacionarDir(raizSubArvore.getEsq());
+		rotacionarEsq(raizSubArvore);
+	}
 
-	//@Override
+
 	public NoBinarioAVL<T> removerNo(NoBinarioAVL<T> referenciaRaiz, T dado) {
 		return referenciaRaiz;
 		// TODO Auto-generated method stub
@@ -125,7 +116,7 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 		if(no.getEsq() != null)
 			altEsq = no.getEsq().getAltura();
 		if(no.getDir() != null)
-			altEsq = no.getDir().getAltura();
+			altDir = no.getDir().getAltura();
 		return Math.abs(altEsq - altDir);
 	}
 	
