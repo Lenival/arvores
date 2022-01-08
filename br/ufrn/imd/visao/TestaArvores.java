@@ -6,6 +6,7 @@ import java.util.Arrays;
 import br.ufrn.imd.controle.ArvoreAVL;
 import br.ufrn.imd.controle.ArvoreBinariaBusca;
 import br.ufrn.imd.modelo.NoBinario;
+import br.ufrn.imd.modelo.NoBinarioAVL;
 
 public class TestaArvores {
 
@@ -70,6 +71,7 @@ public class TestaArvores {
 		System.out.println(arrayDados);
 		System.out.println("Percorrendo árvore em pré-ordem");
 		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 18));   // Remoção
+		a1.removerNo(a1.getRaiz(), 10);
 		arrayDados = new ArrayList<>();
 		a1.percorrerPreOrdem(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
@@ -124,6 +126,14 @@ public class TestaArvores {
 			arrayNos.clear();*/
 		}
 		//avl1.inserirDado(5);
+		avl1.percorrerEmNivel(avl1.getRaiz(), arrayNos);
+		System.out.println("Percorrendo árvore AVL em nível");
+		System.out.println(arrayNos);
+
+		avl1.removerNoAVL((NoBinarioAVL<Integer>)avl1.getRaiz(), 51);
+		avl1.removerNoAVL((NoBinarioAVL<Integer>)avl1.getRaiz(), 43);
+		avl1.removerNoAVL((NoBinarioAVL<Integer>)avl1.getRaiz(), 61);
+		arrayNos.clear();
 		avl1.percorrerEmNivel(avl1.getRaiz(), arrayNos);
 		System.out.println("Percorrendo árvore AVL em nível");
 		System.out.println(arrayNos);

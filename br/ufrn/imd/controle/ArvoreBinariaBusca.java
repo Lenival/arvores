@@ -88,9 +88,11 @@ public class ArvoreBinariaBusca<T extends Comparable <T>> extends ArvoreBinaria<
 			return referenciaRaiz;
 		if (dado.compareTo(referenciaRaiz.getDado()) < 0) {
 			referenciaRaiz.setEsq(removerNo(referenciaRaiz.getEsq(), dado));
+			// Balancear
 		}else {
 			if (dado.compareTo(referenciaRaiz.getDado()) > 0) {
 				referenciaRaiz.setDir(removerNo(referenciaRaiz.getDir(), dado));
+				// Balancear
 			}else {
 				// Tratando os 3 possíveis casos de remoção
 				if ((referenciaRaiz.getEsq() == null) && (referenciaRaiz.getDir() == null) ) {
