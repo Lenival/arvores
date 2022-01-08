@@ -18,8 +18,6 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			no.setAltura(1);
 			this.raiz = no;
 		}else {
-			// TODO (Resolvido, as funções de rotação estavam trocadas) Avaliar problema na inserção do 16 em 61, 89, 66, 43, 51, 16
-			// o resultado incorreto está sendo na inserção do 16 e o 66 continua com raiz, ao invés do 51
 			inserirNo((NoBinarioAVL<T>)raiz, dado);
 		}
 	}
