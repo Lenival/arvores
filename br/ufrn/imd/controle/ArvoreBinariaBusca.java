@@ -19,7 +19,6 @@ public class ArvoreBinariaBusca<T extends Comparable <T>> extends ArvoreBinaria<
 
 	@Override
 	public void inserirNo(NoBinario<T> raizSubArvore,T dado) {
-		// TODO Auto-generated method stub
 		if (dado.compareTo(raizSubArvore.getDado()) < 0 ) {
 			if(raizSubArvore.getEsq() == null) {
 				NoBinario<T> novo_no = new NoBinario<>(dado);

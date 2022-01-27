@@ -63,15 +63,15 @@ public abstract class ArvoreBinaria <T extends Comparable <T>> {
 
 	public void percorrerPosOrdem(NoBinario<T> raiz) {
 		if (raiz != null) {
-			percorrerEmOrdem(raiz.getEsq());
-			percorrerEmOrdem(raiz.getDir());
+			percorrerPosOrdem(raiz.getEsq());
+			percorrerPosOrdem(raiz.getDir());
 			System.out.println(raiz.toString());
 		}		
 	}
 	public void percorrerPosOrdem(NoBinario<T> raiz, ArrayList<T> a) {
 		if (raiz != null) {
-			percorrerEmOrdem(raiz.getEsq(), a);
-			percorrerEmOrdem(raiz.getDir(), a);
+			percorrerPosOrdem(raiz.getEsq(), a);
+			percorrerPosOrdem(raiz.getDir(), a);
 			a.add(raiz.getDado());
 		}		
 	}
