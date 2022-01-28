@@ -130,9 +130,9 @@ public class TestaArvores {
 		System.out.println("Percorrendo árvore AVL em nível");
 		System.out.println(arrayNos);
 
-		avl1.removerNoAVL((NoBinarioAVL<Integer>)avl1.getRaiz(), 51);
-		avl1.removerNoAVL((NoBinarioAVL<Integer>)avl1.getRaiz(), 43);
-		avl1.removerNoAVL((NoBinarioAVL<Integer>)avl1.getRaiz(), 61);
+		avl1.removerNo((NoBinarioAVL<Integer>)avl1.getRaiz(), 51);
+		avl1.removerNo((NoBinarioAVL<Integer>)avl1.getRaiz(), 43);
+		avl1.removerNo((NoBinarioAVL<Integer>)avl1.getRaiz(), 61);
 		arrayNos.clear();
 		avl1.percorrerEmNivel(avl1.getRaiz(), arrayNos);
 		System.out.println("Percorrendo árvore AVL em nível");

@@ -2,6 +2,7 @@ package br.ufrn.imd.controle;
 
 import java.util.ArrayList;
 
+import br.ufrn.imd.modelo.NoBinario;
 import br.ufrn.imd.modelo.NoBinarioEstendido;
 
 public class ArvoreBinariaBuscaEstendida <T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
@@ -42,17 +43,18 @@ public class ArvoreBinariaBuscaEstendida <T extends Comparable <T>> extends Arvo
 			this.raiz = no;
 			nosExtremaEsq.add(no);
 		}else {
-			inserirNo((NoBinarioEstendido<T>)raiz, dado, 1);
+			this.inserirNo(raiz, dado, 1);
 		}
 	}
 
-	public void inserirNo(NoBinarioEstendido<T> raizSubArvore,T dado, Integer profundidade) {
+
+	public void inserirNo(NoBinario<T> raizSubArvore,T dado, Integer profundidade) {
 		if (dado.compareTo(raizSubArvore.getDado()) < 0 ) {
 			if(raizSubArvore.getEsq() == null) {
 				NoBinarioEstendido<T>  novo_no = new NoBinarioEstendido<T>(dado);
 				raizSubArvore.setEsq(novo_no);
 			}else {
-				inserirNo((NoBinarioEstendido<T>)raizSubArvore.getEsq(), dado);
+				this.inserirNo(raizSubArvore.getEsq(), dado);
 			}
 		}
 		if (raizSubArvore.getDado().compareTo(dado) < 0 ) {
@@ -60,7 +62,7 @@ public class ArvoreBinariaBuscaEstendida <T extends Comparable <T>> extends Arvo
 				NoBinarioEstendido<T>  novo_no = new NoBinarioEstendido<T>(dado);
 				raizSubArvore.setDir(novo_no);
 			}else {
-				inserirNo((NoBinarioEstendido<T>)raizSubArvore.getDir(), dado);
+				this.inserirNo(raizSubArvore.getDir(), dado);
 			}
 		}
 	}
@@ -68,6 +70,13 @@ public class ArvoreBinariaBuscaEstendida <T extends Comparable <T>> extends Arvo
 	//@Override
 	public NoBinarioEstendido<T> removerNo(NoBinarioEstendido<T> referenciaRaiz, T dado) {
 		return (NoBinarioEstendido<T>)super.removerNo(referenciaRaiz, dado);
+	}
+
+	@Override
+	public String toString() {
+		ArrayList<T> arrayDados = new ArrayList<T>();
+		this.percorrerPreOrdem(raiz, arrayDados);
+		return arrayDados.toString();
 	}
 	
 	

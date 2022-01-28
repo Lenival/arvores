@@ -18,7 +18,7 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			no.setAltura(1);
 			this.raiz = no;
 		}else {
-			inserirNo((NoBinarioAVL<T>)raiz, dado);
+			this.inserirNo((NoBinarioAVL<T>)raiz, dado);
 		}
 	}
 
@@ -29,7 +29,7 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 				NoBinarioAVL<T> novo_no = new NoBinarioAVL<T>(dado);
 				raizSubArvore.setEsq(novo_no);
 			}else {
-				inserirNo(raizSubArvore.getEsq(), dado);
+				this.inserirNo(raizSubArvore.getEsq(), dado);
 			}
 
 			if (alturaNo(raizSubArvore)<(alturaNo(raizSubArvore.getEsq())+1)) {
@@ -49,7 +49,7 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 				NoBinarioAVL<T> novo_no = new NoBinarioAVL<T>(dado);
 				raizSubArvore.setDir(novo_no);
 			}else {
-				inserirNo(raizSubArvore.getDir(), dado);
+				this.inserirNo(raizSubArvore.getDir(), dado);
 			}
 
 
@@ -103,12 +103,12 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 	}
 
 
-	public NoBinarioAVL<T> removerNoAVL(NoBinarioAVL<T> referenciaRaiz, T dado) {
+	public NoBinarioAVL<T> removerNo(NoBinarioAVL<T> referenciaRaiz, T dado) {
 		// TODO Auto-generated method stub
 		if(referenciaRaiz == null)
 			return referenciaRaiz;
 		if (dado.compareTo(referenciaRaiz.getDado()) < 0) {
-			referenciaRaiz.setEsq(removerNoAVL(referenciaRaiz.getEsq(), dado));
+			referenciaRaiz.setEsq(this.removerNo(referenciaRaiz.getEsq(), dado));
 
 			if (fatorBalanceamento(referenciaRaiz) >= 2) {
 				//if (dado.compareTo(referenciaRaiz.getDir().getDado()) > 0) {
@@ -121,7 +121,7 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			
 		}else {
 			if (dado.compareTo(referenciaRaiz.getDado()) > 0) {
-				referenciaRaiz.setDir(removerNoAVL(referenciaRaiz.getDir(), dado));
+				referenciaRaiz.setDir(this.removerNo(referenciaRaiz.getDir(), dado));
 
 				if (fatorBalanceamento(referenciaRaiz) >= 2) {
 					//if (dado.compareTo(referenciaRaiz.getEsq().getDado()) < 0) {
@@ -145,7 +145,7 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 
 				} else { // Tem 2 filhos!!
 					T dadoAux = buscarMinimo(referenciaRaiz.getDir()).getDado();	// Encontra o menor dado da sub-árvore direita
-					referenciaRaiz.setDir(removerNoAVL(referenciaRaiz.getDir(), dadoAux));	// Remove o nó encontrado antes
+					referenciaRaiz.setDir(this.removerNo(referenciaRaiz.getDir(), dadoAux));	// Remove o nó encontrado antes
 					referenciaRaiz.setDado(dadoAux);	// "Remove" o nó da chamada original substituindo seu dado 
 
 					if (fatorBalanceamento(referenciaRaiz) >= 2) {
