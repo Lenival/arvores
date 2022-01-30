@@ -10,11 +10,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.GridLayout;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -25,11 +22,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 
-import br.ufrn.imd.controle.ArvoreBinaria;
 import br.ufrn.imd.controle.ArvoreBinariaBusca;
 import br.ufrn.imd.controle.ArvoreBinariaBuscaEstendida;
 import br.ufrn.imd.modelo.NoBinario;
@@ -138,7 +132,7 @@ public class TestaArvoresGUI extends JFrame implements ActionListener {
       if (e.getSource() == abrir){
     	  System.out.println("Botão adicionarArquivo pressionado");
     	  JFileChooser fileChooser = new JFileChooser();
-    	  fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+    	  fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
     	  int result = fileChooser.showOpenDialog(this);
     	  File selectedFile = null;
     	  if (result == JFileChooser.APPROVE_OPTION) {
@@ -262,33 +256,5 @@ public class TestaArvoresGUI extends JFrame implements ActionListener {
      drawTree(g2d, arvoreQualquer.getRaiz(), Integer.MAX_VALUE, Integer.MAX_VALUE, fm.getLeading() + fm.getAscent());
      fm = null;
    }
-   
-   /*At the start of the program will show a messagebox with all the commands that 
-    can be used to work this program correctly,also set the dimension of the principal 
-    window */
-   @SuppressWarnings("deprecation")
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-       ArvoreBinariaBuscaEstendida<Integer> tree = new ArvoreBinariaBuscaEstendida<Integer>();
-       JFrame f = new JFrame("Binary Tree");
-       JOptionPane.showMessageDialog(frame, "Welcome"
-               + "\n\nThis program works typing some letters from your keyboard"
-               + "\nSo, the operations you can use are:"
-               + "\n a --- Add an integer number"
-               + "\n f --- Add from file"
-               + "\n s --- Search an integer number"
-               + "\n d --- Delete an integer number"
-               + "\n h --- Help (if you forgot this");
-        f.getContentPane().add(new TestaArvoresGUI(tree));
-        // create and add an event handler for window closing event
-        f.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-            //System.exit(0);
-        }
-     });
-     f.setBounds(50, 50, 700, 700);
-     f.show();
-	}
 
 }

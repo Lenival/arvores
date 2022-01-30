@@ -4,11 +4,13 @@ import java.awt.Container;
 import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JTextArea;
 
 
 public class TelaSobre extends JFrame {
+	
+	private static final long serialVersionUID = 2L;
+
 	JTextArea sobre = new JTextArea();
 	
 	private Font f	= new Font("Courier", Font.PLAIN, 12);
