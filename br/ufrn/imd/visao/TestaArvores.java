@@ -68,6 +68,12 @@ public class TestaArvores {
 		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 10));   // Remoção
 		arrayDados = new ArrayList<>();
 		a1.percorrerEmOrdem(a1.getRaiz(), arrayDados);
+		System.out.println(arrayDados);		
+		System.out.println("Percorrendo árvore em ordem");
+		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 10));   // Remoção
+		arrayDados = new ArrayList<>();
+		a1.removerNo(a1.getRaiz(), a1.getRaiz().getDado());
+		a1.percorrerEmOrdem(a1.getRaiz(), arrayDados);
 		System.out.println(arrayDados);
 		System.out.println("Percorrendo árvore em pré-ordem");
 		//a1.setRaiz(a1.removerNo(a1.getRaiz(), 18));   // Remoção

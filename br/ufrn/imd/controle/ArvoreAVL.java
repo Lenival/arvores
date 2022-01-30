@@ -1,5 +1,6 @@
 package br.ufrn.imd.controle;
 
+import br.ufrn.imd.modelo.NoBinario;
 import br.ufrn.imd.modelo.NoBinarioAVL;
 
 public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
@@ -103,19 +104,21 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 	}
 
 
-	public NoBinarioAVL<T> removerNo(NoBinarioAVL<T> referenciaRaiz, T dado) {
+	//public NoBinarioAVL<T> removerNo(NoBinarioAVL<T> referenciaRaiz, T dado) {
+	@Override
+	public NoBinario<T> removerNo(NoBinario<T> referenciaRaiz, T dado) {
 		// TODO Auto-generated method stub
 		if(referenciaRaiz == null)
 			return referenciaRaiz;
 		if (dado.compareTo(referenciaRaiz.getDado()) < 0) {
 			referenciaRaiz.setEsq(this.removerNo(referenciaRaiz.getEsq(), dado));
 
-			if (fatorBalanceamento(referenciaRaiz) >= 2) {
+			if (fatorBalanceamento((NoBinarioAVL<T>)referenciaRaiz) >= 2) {
 				//if (dado.compareTo(referenciaRaiz.getDir().getDado()) > 0) {
-				if (alturaNo(referenciaRaiz.getEsq()) <= alturaNo(referenciaRaiz.getDir())) {
-					rotacionarDir(referenciaRaiz);
+				if (alturaNo((NoBinarioAVL<T>)referenciaRaiz.getEsq()) <= alturaNo((NoBinarioAVL<T>)referenciaRaiz.getDir())) {
+					rotacionarDir((NoBinarioAVL<T>)referenciaRaiz);
 				}else {
-					rotacionarDirEsq(referenciaRaiz);
+					rotacionarDirEsq((NoBinarioAVL<T>)referenciaRaiz);
 				}
 			}
 			
@@ -123,12 +126,12 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			if (dado.compareTo(referenciaRaiz.getDado()) > 0) {
 				referenciaRaiz.setDir(this.removerNo(referenciaRaiz.getDir(), dado));
 
-				if (fatorBalanceamento(referenciaRaiz) >= 2) {
+				if (fatorBalanceamento((NoBinarioAVL<T>)referenciaRaiz) >= 2) {
 					//if (dado.compareTo(referenciaRaiz.getEsq().getDado()) < 0) {
-					if (alturaNo(referenciaRaiz.getDir()) <= alturaNo(referenciaRaiz.getEsq())) {
-						rotacionarEsq(referenciaRaiz);
+					if (alturaNo((NoBinarioAVL<T>)referenciaRaiz.getDir()) <= alturaNo((NoBinarioAVL<T>)referenciaRaiz.getEsq())) {
+						rotacionarEsq((NoBinarioAVL<T>)referenciaRaiz);
 					}else {
-						rotacionarEsqDir(referenciaRaiz);
+						rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
 					}
 				}
 				
@@ -136,9 +139,9 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 				// Tratando os 3 possíveis casos de remoção
 				if ((referenciaRaiz.getEsq() == null) || (referenciaRaiz.getDir() == null) ) {
 					if (referenciaRaiz.getEsq() != null) // Tem 1 filho à esquerda
-						referenciaRaiz.copiarNo(referenciaRaiz.getEsq()); 
+						((NoBinarioAVL<T>)referenciaRaiz).copiarNo((NoBinarioAVL<T>)referenciaRaiz.getEsq()); 
 					else if (referenciaRaiz.getDir() != null)// Tem 1 filho à direita ou nenhum filho (null)
-						referenciaRaiz.copiarNo(referenciaRaiz.getDir());
+						((NoBinarioAVL<T>)referenciaRaiz).copiarNo((NoBinarioAVL<T>)referenciaRaiz.getDir());
 					else
 						return null;
 						
@@ -148,11 +151,11 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 					referenciaRaiz.setDir(this.removerNo(referenciaRaiz.getDir(), dadoAux));	// Remove o nó encontrado antes
 					referenciaRaiz.setDado(dadoAux);	// "Remove" o nó da chamada original substituindo seu dado 
 
-					if (fatorBalanceamento(referenciaRaiz) >= 2) {
+					if (fatorBalanceamento((NoBinarioAVL<T>)referenciaRaiz) >= 2) {
 						if (dado.compareTo(referenciaRaiz.getEsq().getDado()) < 0) {
-							rotacionarEsq(referenciaRaiz);
+							rotacionarEsq((NoBinarioAVL<T>)referenciaRaiz);
 						}else {
-							rotacionarEsqDir(referenciaRaiz);
+							rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
 						}
 					}
 					
@@ -161,7 +164,7 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			}
 		}
 		if (referenciaRaiz != null)
-			referenciaRaiz.setAltura(maior(alturaNo(referenciaRaiz.getEsq()),alturaNo(referenciaRaiz.getDir()))+1);
+			((NoBinarioAVL<T>)referenciaRaiz).setAltura(maior(alturaNo((NoBinarioAVL<T>)referenciaRaiz.getEsq()),alturaNo((NoBinarioAVL<T>)referenciaRaiz.getDir()))+1);
 		
 		return referenciaRaiz;
 	}

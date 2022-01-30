@@ -10,13 +10,12 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.*;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -25,8 +24,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import br.ufrn.imd.controle.ArvoreBinariaBusca;
-import br.ufrn.imd.controle.ArvoreBinariaBuscaEstendida;
+import br.ufrn.imd.controle.ArvoreAVL;
 import br.ufrn.imd.modelo.NoBinario;
+import br.ufrn.imd.modelo.NoBinarioAVL;
 
 
 public class TestaArvoresGUI extends JFrame implements ActionListener {
@@ -106,26 +106,27 @@ public class TestaArvoresGUI extends JFrame implements ActionListener {
     	  System.out.println("Botão adicionar pressionado");
           input = JOptionPane.showInputDialog("Insira um dado inteiro");
           try{	// Tenta inserir um inteiro
-                  dado = Integer.parseInt(input);
-                  arvoreQualquer.inserirDado(dado);
-                  modificado = true;
-                  repaint();
+              dado = Integer.parseInt(input);
+              arvoreQualquer.inserirDado(dado);
+              modificado = true;
+              repaint();
           }catch(NumberFormatException eNum){
-                  JOptionPane.showMessageDialog(frame, "O dado precisa ser inteiro");
+              JOptionPane.showMessageDialog(frame, "O dado precisa ser inteiro");
               }
       }
       
       if (e.getSource() == remover){
-    	  System.out.println("Botão remover pressionado");
+    	  System.out.println("Botão remover pressionado por tipo: " + this.arvoreQualquer.getClass() + " com nó " + this.arvoreQualquer.getRaiz().getClass());
           input = JOptionPane.showInputDialog("Remova um dado inteiro");
           try{	// Tenta remover um inteiro
-                  dado = Integer.parseInt(input);
-                  arvoreQualquer.removerNo(arvoreQualquer.getRaiz(), dado);
-                  modificado = true;
-                  repaint();
+              dado = Integer.parseInt(input);
+              //((ArvoreAVL<Integer>) arvoreQualquer).removerNo((NoBinarioAVL<Integer>)arvoreQualquer.getRaiz(), dado);
+              arvoreQualquer.setRaiz(arvoreQualquer.removerNo(arvoreQualquer.getRaiz(), dado));
+              modificado = true;
+              repaint();
               }
           catch(NumberFormatException eNum){
-                  JOptionPane.showMessageDialog(frame, "O dado precisa ser inteiro");
+              JOptionPane.showMessageDialog(frame, "O dado precisa ser inteiro");
               }
       }
       
