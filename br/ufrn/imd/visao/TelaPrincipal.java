@@ -62,26 +62,26 @@ public class TelaPrincipal extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mItem1){
-		       ArvoreBinariaBuscaEstendida<Integer> tree = new ArvoreBinariaBuscaEstendida<Integer>();
-		       TestaArvoresGUI f = new TestaArvoresGUI(tree);
-		        f.addWindowListener(new WindowAdapter() {
-		            public void windowClosing(WindowEvent e) {
-		            //System.exit(0);
-		        }
-		     });
-		     f.setBounds(50, 50, 1200, 500);
-		     f.setVisible(true);
+			ArvoreBinariaBuscaEstendida<Integer> tree = new ArvoreBinariaBuscaEstendida<Integer>();
+			TestaArvoresGUI f = new TestaArvoresGUI(tree);
+			f.addWindowListener(new WindowAdapter() {
+			    public void windowClosing(WindowEvent e) {
+			    //System.exit(0);
+			    }
+			 });
+			 f.setBounds(50, 50, 1200, 500);
+			 f.setVisible(true);
 		}
 		if (e.getSource() == mItem2){
-		       ArvoreAVL<Integer> tree = new ArvoreAVL<Integer>();
-		       TestaArvoresGUI f = new TestaArvoresGUI(tree);
-		        f.addWindowListener(new WindowAdapter() {
-		            public void windowClosing(WindowEvent e) {
-		            //System.exit(0);
+			ArvoreAVL<Integer> tree = new ArvoreAVL<Integer>();
+			TestaArvoresGUI f = new TestaArvoresGUI(tree);
+	        f.addWindowListener(new WindowAdapter() {
+	            public void windowClosing(WindowEvent e) {
+	            //System.exit(0);
 		        }
 		     });
-		     f.setBounds(50, 50, 1200, 500);
-		     f.setVisible(true);
+	        f.setBounds(50, 50, 1200, 500);
+	        f.setVisible(true);
 		}
 		if (e.getSource() == mItem7) {
 			TelaSobre tlSobre = new TelaSobre("Sobre");
