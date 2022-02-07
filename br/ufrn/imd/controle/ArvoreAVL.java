@@ -112,15 +112,16 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			return referenciaRaiz;
 		if (dado.compareTo(referenciaRaiz.getDado()) < 0) {
 			referenciaRaiz.setEsq(this.removerNo(referenciaRaiz.getEsq(), dado));
-
+			// Verificar problema
 			if (fatorBalanceamento((NoBinarioAVL<T>)referenciaRaiz) >= 2) {
 				//if (dado.compareTo(referenciaRaiz.getDir().getDado()) > 0) {
-				if (alturaNo((NoBinarioAVL<T>)referenciaRaiz.getEsq()) <= alturaNo((NoBinarioAVL<T>)referenciaRaiz.getDir())) {
-					//rotacionarDir((NoBinarioAVL<T>)referenciaRaiz);
-					rotacionarDirEsq((NoBinarioAVL<T>)referenciaRaiz);
-				}else {
-					//rotacionarDirEsq((NoBinarioAVL<T>)referenciaRaiz);
+				if (alturaNo((NoBinarioAVL<T>)referenciaRaiz.getDir().getEsq()) <= alturaNo((NoBinarioAVL<T>)referenciaRaiz.getDir().getDir())) {
 					rotacionarDir((NoBinarioAVL<T>)referenciaRaiz);
+					//rotacionarDirEsq((NoBinarioAVL<T>)referenciaRaiz);
+				}else {
+					//rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
+					rotacionarDirEsq((NoBinarioAVL<T>)referenciaRaiz);
+					//rotacionarDir((NoBinarioAVL<T>)referenciaRaiz);
 				}
 			}
 			
@@ -128,14 +129,16 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 			if (dado.compareTo(referenciaRaiz.getDado()) > 0) {
 				referenciaRaiz.setDir(this.removerNo(referenciaRaiz.getDir(), dado));
 
+				// Verificar problema
 				if (fatorBalanceamento((NoBinarioAVL<T>)referenciaRaiz) >= 2) {
 					//if (dado.compareTo(referenciaRaiz.getEsq().getDado()) < 0) {
-					if (alturaNo((NoBinarioAVL<T>)referenciaRaiz.getDir()) <= alturaNo((NoBinarioAVL<T>)referenciaRaiz.getEsq())) {
-						//rotacionarEsq((NoBinarioAVL<T>)referenciaRaiz);
-						rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
-					}else {
-						//rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
+					if (alturaNo((NoBinarioAVL<T>)(referenciaRaiz.getEsq().getDir())) <= alturaNo((NoBinarioAVL<T>)referenciaRaiz.getEsq().getEsq())) {
 						rotacionarEsq((NoBinarioAVL<T>)referenciaRaiz);
+						//rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
+					}else {
+						//rotacionarDirEsq((NoBinarioAVL<T>)referenciaRaiz);
+						rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
+						//rotacionarEsq((NoBinarioAVL<T>)referenciaRaiz);
 					}
 				}
 				
@@ -156,10 +159,12 @@ public class ArvoreAVL<T extends Comparable <T>> extends ArvoreBinariaBusca<T> {
 					referenciaRaiz.setDado(dadoAux);	// "Remove" o nó da chamada original substituindo seu dado 
 
 					if (fatorBalanceamento((NoBinarioAVL<T>)referenciaRaiz) >= 2) {
-						if (dado.compareTo(referenciaRaiz.getEsq().getDado()) < 0) {
+						if (alturaNo((NoBinarioAVL<T>)(referenciaRaiz.getEsq().getDir())) <= alturaNo((NoBinarioAVL<T>)referenciaRaiz.getEsq().getEsq())) {
 							rotacionarEsq((NoBinarioAVL<T>)referenciaRaiz);
+							//rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
 						}else {
 							rotacionarEsqDir((NoBinarioAVL<T>)referenciaRaiz);
+							//rotacionarEsq((NoBinarioAVL<T>)referenciaRaiz);
 						}
 					}
 					
